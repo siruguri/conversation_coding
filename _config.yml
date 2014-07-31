@@ -1,15 +1,16 @@
 # Dependencies
 markdown:         redcarpet
-pygments:         true
+highlighter:	  pygments
 
 # Permalinks
 permalink:        pretty
 
 # Setup
-title:            Hyde
-tagline:          'A Jekyll theme'
-description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
-url:              http://hyde.getpoole.com
+title:            Conversational Coding
+tagline:          'Learn to Talk Geek'
+sidebar_description: ''
+description:      'The goal of Conversational Coding is to broaden computer literacy. We help beginning programmers "level-up," by identifying the important stepping-stones they should land on at each stage in their learning journey, so that they can boost themselves further and quicker.'
+url:              http://www.conversationalcoding.com/
 baseurl:          /
 
 author:

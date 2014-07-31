@@ -3,28 +3,25 @@ layout: page
 title: About
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+The goal of the Conversational Coding team is to broaden computer literacy. We help beginners find the right level of
+understanding they need to get comfortable with learning how online technologies work. As experienced programmers, who
+have been at this for many years, we have seen a variety of tools being introduced that make the introductoon to coding
+a far gentler one than it used to be. Our lessons help beginners get familiar with these tools, and learn how to use
+them as stepping-stones to graduate to a deeper understanding of how computer programs work.
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+## What We Focus On 
 
-There are currently two themes built on Poole:
+Our main focus is on "dynamic web applications" - something you can make accessible on the Internet for people to use
+via their browsers and that stores user data of some sort. We believe that the Ruby on Rails framework is the best way
+to be introduced to the various concepts involved. Specifically, our lessons focus on the following topics:
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+* Setting up your development environment: best practices for Windows and Mac OSX machines.
+* Getting familiar with programming: Using Ruby for simple data analysis
+* Product and Project Design: What to think about when embarking on any programming project
+* The MVC concepts, and how Ruby on Rails provides simple to complex ways of implementing it
+* Deploying to production: How web servers and cloud-based services (like Heroku) work
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+Have questions or suggestions? Feel free to [add to the conversation on GitHub](https://github.com/conversationalcoding/conversationalcoding.github.io/issues/new) or [ask us on Twitter](https://twitter.com/italkcode).
 
-## Setup
+Have fun coding!
 
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
