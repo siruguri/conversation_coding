@@ -1,0 +1,26 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:	  pygments
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Conversational Coding
+tagline:          'Learn to Talk Geek'
+sidebar_description: ''
+description:      'The goal of Conversational Coding is to broaden computer literacy. We help beginning programmers "level-up," by identifying the important stepping-stones they should land on at each stage in their learning journey, so that they can boost themselves further and quicker.'
+url:              http://localhost:4000/
+baseurl:          /
+
+author:
+  name:           'Mark Otto'
+  url:            https://twitter.com/mdo
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:           https://github.com/poole/hyde
