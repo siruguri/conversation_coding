@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Parsing the HTML to a DOM Tree
+categories: beginners-series
 ---
 
 The hierarchical structure of an HTML page is usually accessed via a data structure called the

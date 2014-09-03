@@ -1,6 +1,7 @@
 ---
 layout: post
 title: HTML Basics - Understanding HTML and the DOM
+categories: beginners-series
 ---
 
 To start, let's breeze through a basic understanding of HTML. If you are reading this webpage
@@ -37,6 +38,6 @@ The entire HTML specification will take a while to learn, but some good resource
 * []()
 
 Our [next lesson is on understanding how to convert this HTML hierarchy into a
-"DOM"](<< next_post >>) - away of turning a page full of HTML text into something you can easily
+"DOM"](<< next_post_by_cat >>) - away of turning a page full of HTML text into something you can easily
 manipulate in a program.
 
