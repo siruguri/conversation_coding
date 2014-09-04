@@ -1,7 +1,7 @@
 ---
 layout: post
-title: HTML Basics - Understanding HTML and the DOM
-categories: beginners-series
+title: HTML Basics&#58; Understanding HTML and the DOM
+categories: beginners-series front-end
 ---
 
 To start, let's breeze through a basic understanding of HTML. If you are reading this webpage

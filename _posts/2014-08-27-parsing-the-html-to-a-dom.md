@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Parsing the HTML to a DOM Tree
-categories: beginners-series
+categories: beginners-series front-end
 ---
 
 The hierarchical structure of an HTML page is usually accessed via a data structure called the
@@ -95,11 +95,11 @@ title_text_divs = dom.css('div.title-text')
 
 CSS selectors are used not just in parsing a DOM tree, but also in specifying the style for nodes, using cascading stylesheets. This lesson doesn't address how CSS works when applying styles - for a good introductory start, check out [the Mozilla Developer Network Guide to Getting Started with CSS](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/What_is_CSS).
 
+The [next post in this series on SQL basics](<< next_post_by_cat >>) will cover the use of SQL - we will see how to get the information we obtain from a webpage into a local (relational) database.
+
 # References 
 
 * Some tutorials on DOM: [A free video tutorial on Lynda](http://www.lynda.com/HTML-tutorials/What-Document-Object-Model-DOM/122462/137616-4.html)
 * CSS
   * [How to use CSS to style your HTML](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/What_is_CSS)
   * More on selectors: [the basics](http://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048)
-* Find a nokogiri tutorial that shows CSS selectors - I'm sure there's one out there.
-
