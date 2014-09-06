@@ -11,7 +11,6 @@ module Jekyll
         found_cat_succ = false
         while next_post and !found_cat_succ do
           diff = next_post.categories - current_post.categories
-          puts "Checking #{diff}"
           if diff.count != next_post.categories.count # something from the current post was in the next post
             found_cat_succ=true
             next_post_cat_repl = next_post.url
@@ -21,8 +20,8 @@ module Jekyll
         end
       end        
 
-      input = input.gsub(/%3C%20next_post%20%3E/, next_post_repl)
-      input.gsub(/%3C%20next_post_by_cat%20%3E/, next_post_cat_repl)
+      input = input.gsub(/\-\-next_post\-\-/, next_post_repl)
+      input.gsub(/\-\-next_post_by_cat\-\-/, next_post_cat_repl)
       # 
     end
   end

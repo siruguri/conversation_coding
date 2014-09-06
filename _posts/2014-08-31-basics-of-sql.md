@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SQL Basics&#58; Understanding Database Queries
-categories: beginners-series, back-end
+categories: beginners-series back-end
 ---
 
 In this exercise, we figure out how to create and update data in a database. For this purpose, we will use SQLite3 as our database application.
