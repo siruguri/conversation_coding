@@ -44,6 +44,30 @@ You can use a number of request/response header viewers on the web, to see all t
 1. [http://web-sniffer.net/](http://web-sniffer.net/): This one is a bit more flexible with regard to the app layer protocol (HTTP/S)
 1. [Ask Apache](http://www.askapache.com/online-tools/http-headers-tool/): This one lets you customize your request a lot more.
 
+Here's a screenshot of a request made to the Ask Apache site above for [The End of the Internet Page](http://www.weirdity.com/internet/eoti.html) - the
+first response header is the status header, with the "OK" message we mentioned earlier whose code is **200**. 
+
+![End of the internet response headers]({{ site_url }}/assets/response headers.png)
+
+The next five headers are pretty common to most responses, three of which we explain here:
+
+* Date: The timestamp of the response
+* Content-Type: The type of data that's in the response. `text/html` is the standard type for something a browser can understand.
+* Set-Cookie: The cookies this server wants to set on your browser.
+
+# Resources and Responses
+
+So how is the request interpreted in order to create a response? The key lies in understanding the _resource_ part of the request. Remember, in [our previous lesson on HTTP](--prev_lesson_by_cat--), we discussed that the request has two essential parts - a method and a resource. To refresh, the "resource" is the string of characters you type in after the domain name. In the request to the [End of the Internet page](http://www.weirdity.com/internet/eoti.html), for example, the resource is `/internet/eoti.html`
+
+On many servers, there is in fact a 1-1 correspondence between the resource and an actual file. The slashes in the resource will usually correspond to a folder-and-file structure on a machine somewhere. In the case of the resource `/internet/eoti.html`, it's very probably that somewhere on the Internet, there's a machine, that has a folder named `internet` in which there's a file named `eoti.html`.
+
+But more and more, resources in a URL are not set up to correspond to a specific file - instead, they are meant to correspond to some action. For example, when you search for something on Google, say via the search bar in Firefox, you can see that the resource being sent to google.com is `/search`:
+
+![a]({{ site_url }}/assets/google search resource.png)
+
+This resource tells Google that you are interested in doing a web search on Google. If instead you wanted to read about Google, the company, you would use a different resource in your requests, namely `/about`. Type in `www.google.com/about` in your browser and [see what you get](http://www.google.com/about/).
+
+That's all there is to the basic understanding of how HTTP works - of course, there is a lot more to what you can say in a request, and what a server application can say back to you in its response. But understanding resources and response statuses is the most important thing to know!
 
 # Advanced Topics
 
