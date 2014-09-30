@@ -56,6 +56,16 @@ The most popular DOM parsing library in Ruby is *[Nokogiri](http://www.nokogiri.
 
 {% endhighlight %}
 
+## Parsing A URL
+
+Most times, you are going to want to parse a webpage, for which you'll have a URL, rather than parsing a file on your computer. There are [many ways of fetching webpages in Ruby](http://stackoverflow.com/questions/4581075/how-make-a-http-get-request-using-ruby-on-rails), the simplest of which is implemented by the [Ruby 'openuri' wrapper in the `stdlib`](http://ruby-doc.org/stdlib-2.1.2/libdoc/open-uri/rdoc/OpenURI.html):
+
+{% highlight ruby %}
+
+{% include code/nokogiri_with_url.rb %}
+
+{% endhighlight %}
+
 In this lesson, we'll look at one way of doing this - `CSS Selectors`.
 
 ## Using a CSS Selector
