@@ -99,7 +99,7 @@ tag. Each of those child nodes will have further child nodes, because they might
 HTML tags, in the HTML document. For example, here’s what the “tree structure” of a very simple HTML
 document (note that the root node here is the “dummy” mentioned above):</p>
 
-<p><img src="http://localhost:4000/assets/html_hierarchy.gif" alt="DOM tree example" /></p>
+<p><img src="http://www.conversationalcoding.com/assets/html_hierarchy.gif" alt="DOM tree example" /></p>
 
 <h1 id="printing-out-nodes">Printing Out Nodes</h1>
 
@@ -137,9 +137,23 @@ corresponds to the <code>&lt;a&gt;</code> tag (the <em>anchor</em> tag.)</p>
 
 <span class="n">dom</span><span class="o">=</span><span class="no">Nokogiri</span><span class="o">::</span><span class="no">HTML</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;input.html&#39;</span><span class="p">))</span>
 
-<span class="n">all_list_item</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">)</span>
+<span class="n">all_list_items</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">)</span>
 
 <span class="nb">puts</span> <span class="s2">&quot;The number of list items is </span><span class="si">#{</span><span class="n">all_list_items</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<h2 id="parsing-a-url">Parsing A URL</h2>
+
+<p>Most times, you are going to want to parse a webpage, for which you’ll have a URL, rather than parsing a file on your computer. There are <a href="http://stackoverflow.com/questions/4581075/how-make-a-http-get-request-using-ruby-on-rails">many ways of fetching webpages in Ruby</a>, the simplest of which is implemented by the <a href="http://ruby-doc.org/stdlib-2.1.2/libdoc/open-uri/rdoc/OpenURI.html">Ruby ‘openuri’ wrapper in the <code>stdlib</code></a>:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;nokogiri&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
+
+<span class="n">dom</span><span class="o">=</span><span class="no">Nokogiri</span><span class="o">::</span><span class="no">HTML</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;http://www.xkcd.com&#39;</span><span class="p">))</span>
+
+<span class="n">all_list_items</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">&quot;The number of list items on XKCD&#39;s homepage is </span><span class="si">#{</span><span class="n">all_list_items</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
 
 <p>In this lesson, we’ll look at one way of doing this - <code>CSS Selectors</code>.</p>

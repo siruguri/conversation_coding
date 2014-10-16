@@ -48,7 +48,7 @@ It's easy to observe these headers using your browser - either Chrome or Firefox
 
 Below, we have the [XKCD website](http://www.xkcd.com) up, and you can see it generates a host of GET requests and one POST request.
 
-![Network Tab in Firefox Inspect Element]({{ site.url }}assets/network tab inspect firefox.png)
+![Network Tab in Firefox Inspect Element]({{ site_url}}/assets/network tab inspect firefox.png)
 
 In [the follow-up to this lesson](--next_post_by_cat--), we will go into more detail into how HTTP headers are constructed, and what the HTTP response looks like.
 
