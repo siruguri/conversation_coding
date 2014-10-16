@@ -23,7 +23,7 @@ In this article, we'll dig deeper into the second aspect of web applications - w
 
 # The Structure Of An HTTP Message
 
-Whether a request or a response, an HTTP message is required to contain two essential parts - the request's _headers_
+Whether it is a request or a response, an HTTP message is required to contain two essential parts - the request's _headers_
 and its _body_. 
 
 The headers typically describe something about the communication between the browser and the server itself; hence, they are referred to as containing _metadata_ - which means, "data that is about (some other) data." For example, a header might have information about the length of the body, or about what type of data is in the body (an image, say.)
