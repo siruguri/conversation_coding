@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      What is HTTP? How Web Applications and Browsers Communicate &middot; Conversational Coding
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Conversational Coding
+        </a>
+      </h1>
+      <p class="lead"></p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/events/">Events</a>
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+
+    <p>&copy; 2014. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">What is HTTP? How Web Applications and Browsers Communicate</h1>
+  <span class="post-date">01 Sep 2014</span>
+  <span class='comment-count-field'><a href='/beginners-series/http/2014/09/01/what-is-http#disqus_thread'></a></span>
+  <p>Web applications are typically written as computer programs that run constantly, waiting for <em>requests</em> from browsers
+running on other computers. Those computers can be someone’s desktop, laptop, or mobile phone. The browser requests are
+usually made by a human being who clicks on a link in a webpage (or in her email,) and expects to see a webpage as a
+result. The job of the web application is to respond with the code corresponding to the webpage that the browser can
+interpret correctly.</p>
+
+<p>Browsers (and the human beings behind them) aren’t the only ones making requests to web applications. Sometimes, it’s another program that’s talking to the web application - robots talking to robots. In fact, most Internet traffic is automated - <a href="http://www.cnet.com/news/bots-now-running-the-internet-with-61-percent-of-web-traffic/">“non-human” traffic outnumber human-originated web traffic</a>. </p>
+
+<p>A web application is required to do <em>two</em> things:</p>
+
+<ol>
+  <li>Run constantly, waiting for requests</li>
+  <li>Accept requests that are formatted in a special <em>protocol</em>, called the Hyper Text Transfer Protocol, or HTTP, and generate a corresponding response that’s in the HTTP format as well. This is why when you type in a webpage <em>URL</em> into a browser’s address bar, you (frequently) prefix it <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> with the letters “h-t-t-p”.</li>
+</ol>
+
+<p>Computer programs that run constantly are also referred to conventionally as <em>servers</em>. Hence, a web application is also sometimes called a <em>web server</em>. </p>
+
+<p>In this article, we’ll dig deeper into the second aspect of web applications - what is HTTP?</p>
+
+<h1 id="the-structure-of-an-http-message">The Structure Of An HTTP Message</h1>
+
+<p>Whether a request or a response, an HTTP message is required to contain two essential parts - the request’s <em>headers</em>
+and its <em>body</em>. </p>
+
+<p>The headers typically describe something about the communication between the browser and the server itself; hence, they are referred to as containing <em>metadata</em> - which means, “data that is about (some other) data.” For example, a header might have information about the length of the body, or about what type of data is in the body (an image, say.)</p>
+
+<p>The body of the HTTP response typically contains <em>HTML</em> (Hyper Text Markup Language) code, the language understood by
+browsers, but that’s not always the case.</p>
+
+<h2 id="http-headers">HTTP Headers</h2>
+
+<p>There is no definitive list of all headers - partly because the <em>specification</em> for HTTP allows for custom headers and different web applications will add headers that they can understand and use. But there are some headers that are required.</p>
+
+<p>The most important header <em>in an HTTP request</em> that you should wrap your head around is the one that contains the <em>method</em> information. Each HTTP request consists of two essential parts:</p>
+
+<ol>
+  <li>A <em>resource</em>, that gives the web application some information about what data on the server is being requested</li>
+  <li>A <em>method</em>, that says what the web application should do with the data referenced in the <em>resource</em>.</li>
+</ol>
+
+<p>There are <a href="http://www.iana.org/assignments/http-methods/http-methods.xhtml">many HTTP methods</a> that a browser can send in an HTTP request, but the two you will most often encounter are GET and POST.</p>
+
+<p>The resource is usually everything you see in the browser address bar after the server name, that is, the “www.google.com” part. If you type in any website name into the browser and hit Enter, you will see that the browser adds a ‘<code>/</code>’ at the end of the website name. That means that by default, the resource in the request is simple that - the ‘<code>/</code>’ (or <em>slash</em>) symbol.</p>
+
+<p>It’s easy to observe these headers using your browser - either Chrome or Firefox. Here, we’ll use Firefox and its “Inspect Element” feature - right click on any webpage and you’ll see this information under the Network tab. (On Chrome, you can get similar information using the Developer Tools interface under the Settings button at the top-right of the Chrome window.) You might have to hit refresh on the browser first.</p>
+
+<p>Below, we have the <a href="http://www.xkcd.com">XKCD website</a> up, and you can see it generates a host of GET requests and one POST request.</p>
+
+<p><img src="http://localhost:4000/assets/network tab inspect firefox.png" alt="Network Tab in Firefox Inspect Element" /></p>
+
+<p>In <a href="/beginners-series/http/2014/09/02/what-is-http-part2/">the follow-up to this lesson</a>, we will go into more detail into how HTTP headers are constructed, and what the HTTP response looks like.</p>
+
+<h1 id="advanced-topics">Advanced Topics</h1>
+
+<ul>
+  <li>Find out how non-human originators of requests - bots - announce themselves in order to differentiate themselves from humans. Why might bots want to do this?</li>
+  <li>Find out what an <em>RFC</em> is. 
+    <ul>
+      <li>See if you can track down a “satirical” or “joke” or “fake” RFC.</li>
+      <li>Can you understand the RFC process enough and be inspired by it enough, to write a “joke” RFC yourself?</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="quick-links">Quick Links</h1>
+
+<p>Here are some links we’ve shared in this article.</p>
+
+<ul>
+  <li>HTTP
+    <ul>
+      <li><a href="http://tools.ietf.org/html/rfc2616">The HTTP 1.1 specification</a>, aka RFC 2616 (quasi-latest, as of Sep 2014).</li>
+      <li>A list of HTTP methods, aka <a href="http://www.iana.org/assignments/http-methods/http-methods.xhtml">the HTTP method registry</a></li>
+    </ul>
+  </li>
+  <li>lists of HTTP headers</li>
+</ul>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>And even if you don’t type in “http,” your browser will automatically, silently, do it for you. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+
+<!-- Disqus -->
+<div id="disqus_thread">
+  <script type="text/javascript">
+   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+   var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+   
+   /* * * DON'T EDIT BELOW THIS LINE * * */
+   (function() {
+     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>
+    Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span>span></a>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/http/2014/09/02/what-is-http-part2/">
+            What is HTTP? How Web Applications and Browsers Communicate (Part II)
+            <small>02 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/back-end/2014/08/31/basics-of-sql/">
+            SQL Basics&#58; Understanding Database Queries
+            <small>31 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/front-end/2014/08/27/parsing-the-html-to-a-dom/">
+            Parsing the HTML to a DOM Tree
+            <small>27 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+  </body>
+</html>

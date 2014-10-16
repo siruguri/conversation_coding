@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      HTML Basics&#58; Understanding HTML and the DOM &middot; Conversational Coding
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Conversational Coding
+        </a>
+      </h1>
+      <p class="lead"></p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/events/">Events</a>
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+
+    <p>&copy; 2014. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">HTML Basics&#58; Understanding HTML and the DOM</h1>
+  <span class="post-date">26 Aug 2014</span>
+  <span class='comment-count-field'><a href='/beginners-series/front-end/2014/08/26/html-basics#disqus_thread'></a></span>
+  <p>To start, let’s breeze through a basic understanding of HTML. If you are reading this webpage
+in a desktop browser, like Firefox, you should be able to view source, typically via the top-level
+menu or the right click menu. You will see the text of the webpage interspersed with what are called
+HTML tags, which are text strings prefixed with the <code>&lt;</code> character. Here, for example, is the source of this very page:</p>
+
+<p><img src="http://localhost:4000/assets/view_source.png" alt="View Source Screenshot" /></p>
+
+<p>The tags are part of the HTML language specification - to put it simply, each tag has a <em>name</em>, and
+a list of <em>tag attributes</em>. The tag attributes are specific as <em>key/value pairs</em>, in the form
+<code>key=value</code>.</p>
+
+<p>Tags define a hierarchical structure - each tag is said to <em>contain</em> one or more other tags, and
+the containment is shown by using pairs of <em>opening</em> and <em>closing</em> tags. Closing tags are written
+simply in the form <code>&lt;/tag_name&gt;</code> - note that they start with <code>&lt;/</code> and end in <code>&gt;</code>. Above you’ll see that the <code>&lt;head&gt;</code> opening tag is closed by a corresponding <code>&lt;/head&gt;</code> closing tag. Note that not all tags need to come in opening and closing pairs. To learn more about which which tags to close, which not to, and why there’s a difference, read <a href="http://www.colorglare.com/2014/02/03/to-close-or-not-to-close.html">this good blog post on <em>void elements</em></a>.</p>
+
+<p>A simple HTML document has the following structure - the entire document is contained inside the
+<code>&lt;html&gt;</code> tag, and typically, the <code>&lt;html&gt;</code> tag contains a minimum of two tags, the <code>&lt;head&gt;</code> and the
+<code>&lt;body&gt;</code> tag.</p>
+
+<p>Additionally, <em>well-formed</em> HTML documents also declare their <em>document type</em>, which in the case of an HTML document is, simply, “html”.</p>
+
+<p>By convention, some tags are referred to typically by longer names - the <code>&lt;a&gt;</code> tag for example is
+called the <em>anchor</em> tag; any tag that is the letter <code>h</code> followed by a number - like <code>&lt;h3&gt;</code> - is
+called a <em>header</em> tag; the tag <code>&lt;li&gt;</code> is called the <em>list item</em> tag, and so on. Frequently, if not
+always, tag names are simply acronyms for the “long name version.”</p>
+
+<h1 id="references">References</h1>
+
+<p>The entire HTML specification will take a while to learn, but some good resources to start from are listed here:</p>
+
+<ul>
+  <li>[]()</li>
+</ul>
+
+<p>Our <a href="/beginners-series/front-end/2014/08/27/parsing-the-html-to-a-dom/">next lesson is on understanding how to convert this HTML hierarchy into a
+“DOM”</a> - away of turning a page full of HTML text into something you can easily
+manipulate in a program.</p>
+
+
+</div>
+
+<!-- Disqus -->
+<div id="disqus_thread">
+  <script type="text/javascript">
+   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+   var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+   
+   /* * * DON'T EDIT BELOW THIS LINE * * */
+   (function() {
+     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>
+    Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span>span></a>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/http/2014/09/02/what-is-http-part2/">
+            What is HTTP? How Web Applications and Browsers Communicate (Part II)
+            <small>02 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/http/2014/09/01/what-is-http/">
+            What is HTTP? How Web Applications and Browsers Communicate
+            <small>01 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/back-end/2014/08/31/basics-of-sql/">
+            SQL Basics&#58; Understanding Database Queries
+            <small>31 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+  </body>
+</html>

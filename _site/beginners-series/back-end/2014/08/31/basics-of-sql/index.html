@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      SQL Basics&#58; Understanding Database Queries &middot; Conversational Coding
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Conversational Coding
+        </a>
+      </h1>
+      <p class="lead"></p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/events/">Events</a>
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+
+    <p>&copy; 2014. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">SQL Basics&#58; Understanding Database Queries</h1>
+  <span class="post-date">31 Aug 2014</span>
+  <span class='comment-count-field'><a href='/beginners-series/back-end/2014/08/31/basics-of-sql#disqus_thread'></a></span>
+  <p>In this exercise, we figure out how to create and update data in a database. For this purpose, we will use SQLite3 as our database application.</p>
+
+<p>Note that there are many applications you can use to create your relational databases (<em>RDBMSes</em>). The most popular <a href="http://en.wikipedia.org/wiki/List_of_relational_database_management_systems">open source RDBMSes</a> are probably Postgres, MySQL, CouchDB, and SQLite3. Which one might you use? Well, there are numerous <a href="https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems">posts</a> on <a href="http://www.databasejournal.com/sqletc/article.php/3486596/Open-Source-Databases-A-brief-look-at-the-Berkeley-DB-Derby-Firebird-Ingres-MySQL-and-PostgreSQL-DBMS.htm">the Web</a> that <a href="http://stackoverflow.com/questions/1635273/postgres-vs-firebird">attempt to answer</a> that very question! </p>
+
+<p>Popular paid RDBMS apps include Microsoft’s SQL Server and Oracle Corp’s Oracle suite of RDBMS.</p>
+
+<p>So what should you pick? We think that as a beginner, you won’t find yourself facing the kind of choices that are talked
+about here, and using SQLite3 might be your best option, wining as it does on simplicity. The advantage of SQLite3 over
+all other open source RDBMS applications is that the database is stored directly on a single file in your machine -
+other applications require the setup of an intermediate “database server” that interacts with a much more complicated
+file structure to store your data.</p>
+
+<h1 id="tables-and-columns">Tables and Columns</h1>
+
+<p>The simplest idea to know about building a database is that it contains tables, and those tables have columns. If you
+have no familiarity with databases, it might be useful to think of it as a spreadsheet, with each worksheet in your
+spreadsheet as a <em>table</em>, and each column in a specific worksheet as a <em>column</em> in that table.</p>
+
+<p>Columns in database tables are required to be described by at least two pieces of information:</p>
+
+<ul>
+  <li>A name (which you can think of as a <em>column header</em>)</li>
+  <li>A <em>data type</em></li>
+</ul>
+
+<p>Why a data type? This is usually for space and other efficiency considerations. Here’s <a href="http://www.brandonsavage.net/designing-databases-picking-the-right-data-types/">an old-ish but good post that describes some of these considerations</a>, and another that lists <a href="http://www.w3schools.com/sql/sql_datatypes_general.asp">common data types that RDBMSes will support</a>.</p>
+
+<p>Data types are important for you to think about, even in beginners’ apps. Be aware at least of the following types:</p>
+
+<ul>
+  <li><em>string</em> and <em>text</em>, and the distinction between the two. Both are for storing textual data, but <em>string</em> data types are used when the data is known to have a limit (usually, around 256 characters in a database.)</li>
+  <li><em>integer</em> and <em>float</em>: When your data is guaranteed to be numeric</li>
+  <li><em>boolean</em>: When the data value is <a href="http://en.wikipedia.org/wiki/Boolean_data_type">Boolean</a>, that is - either <code>true</code> or <code>false</code></li>
+  <li><em>datetime</em>: When the data value represents a date (but <em>not</em> just a number representing seconds or minutes, specifically it is a very specific date on the calendar, complete with year.) <em>datetime</em> values are represented using a specific format, called the <em>POSIX date</em> format, which looks like “2014-07-04 07:43:12PM PST”</li>
+</ul>
+
+<h2 id="talking-to-the-database">Talking to the Database</h2>
+
+<p>SQL is the language you use to communicate with the database. Anything you do with a database requires constructing SQL to do it.</p>
+
+<p>Note that all SQL commands have to end with a semicolon - <code>;</code></p>
+
+<p>To create a table, for example, you send the following SQL command to a database</p>
+
+<pre><code>CREATE TABLE table_name COLUMNS (col_name_1 type1, col_name_2 type2);
+</code></pre>
+
+<p>It’s customary to show SQL-specific commands, like <code>CREATE</code> and <code>COLUMNS</code> in uppercase and names of things like columns and types in lower-case. However, most RDBMS apps don’t differentiate between lowercase and uppercase.</p>
+
+<p>To add columns to an existing table, you would use the following SQL command:</p>
+
+<pre><code>ALTER TABLE table_name ADD COLUMN new_col_name new_col_type;
+</code></pre>
+
+<h1 id="the-ruby-sqlite3-gem">The Ruby SQLite3 Gem</h1>
+
+<p>When using the SQLite3 gem to communicate with a database, the process of communicating with a database is often broken down into two parts:</p>
+
+<ul>
+  <li>Making a connection to the database, which usually happens once at the start of the application or script</li>
+  <li>Preparing a <em>statement</em> via the connection</li>
+  <li><em>Executing</em> the statement</li>
+</ul>
+
+<h2 id="making-a-connection">Making a connection</h2>
+
+<p>To make a connection, you usually need some identifier that locates the database. In the case of SQLite3, that identifier is simply the name of the file that stores the database:</p>
+
+<pre><code>require "sqlite3"
+db_conn = SQLite3::Database.new "test.db"
+</code></pre>
+
+<p>Here, the filename is <code>test.db</code> - if it exists, then a connection is made to the database that’s in that file; else, a new file is created and all subsequent commands sent to this connection object (<code>db_conn</code>) will write data into this file. </p>
+
+<h2 id="queries-and-bindings">Queries and Bindings</h2>
+
+<p>A query, aka <em>DB statements</em>, or <em>DB queries</em>, will typically contain values that are being inserted into, or updated
+in, the database. Binding is the process by which you take a template DB statement, which has <em>placeholders</em> for the values you want to insert, and assign the values to those placeholders. Placeholders are noted by the <code>?</code> symbol. The process for doing this in the Ruby gem is as follows:</p>
+
+<pre><code>values = [{title: 'Post title', body: 'This is a post.',  date:'2014-04-01 14:35:00'},
+          {title: 'Another post', body: 'Another post I wrote.',  date:'2014-05-11 07:12:34'}]
+
+values.each do |row|
+  stmt = SQLite3::Statement.new(db_conn, "INSERT INTO  posts (title, body, date_written) values (?, ?, ?)")
+  stmt.bind_params(row[:title], row[:body], row[:date])
+  stmt.execute 
+  stmt.close
+end
+</code></pre>
+
+<p>Here, we go through four steps for each insertion into the database:</p>
+
+<ol>
+  <li><em>Prepare</em> the statement, by telling it which database it will operate on.</li>
+  <li><em>Bind</em> it to the specific values we are inserting. This step, also called “sanitizing queries,” removes certain common security issues that arise when creating database queries - you can read more on this blog about <a href="http://zetcode.com/db/sqliteruby/bind/">query placeholders and binding and why it’s important</a>. When queries are not sanitized, <a href="http://security.stackexchange.com/questions/25684/how-can-i-explain-sql-injection-without-technical-jargon">they make your system vulnerable to “SQL injection.”</a></li>
+  <li>Execute it</li>
+  <li>Close it</li>
+</ol>
+
+<p>It’s “<a href="http://bclennox.com/code-hygiene">good coding hygiene</a>” to <em>close</em> statements and database connections. It’s somewhat like ejecting a USB device from your computer before pulling the cord out.</p>
+
+<p>To gain a deeper understanding of SQL, read through the MySQL reference manual listed in the References section.</p>
+
+<h1 id="homework">Homework</h1>
+
+<ol>
+  <li>Based on the explanation of sanitization and injection, <a href="http://xkcd.com/327/">explain this joke</a>.</li>
+</ol>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="http://www.w3schools.com/sql/">W3 Schools section on SQL commands</a></li>
+  <li><a href="http://dev.mysql.com/doc/refman/5.7/en/">MySQL Reference Manual</a> - v 5.7 as of the writing of this text book.</li>
+  <li><a href="">POSIX date format reference</a></li>
+</ul>
+
+</div>
+
+<!-- Disqus -->
+<div id="disqus_thread">
+  <script type="text/javascript">
+   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+   var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+   
+   /* * * DON'T EDIT BELOW THIS LINE * * */
+   (function() {
+     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>
+    Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span>span></a>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/http/2014/09/02/what-is-http-part2/">
+            What is HTTP? How Web Applications and Browsers Communicate (Part II)
+            <small>02 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/http/2014/09/01/what-is-http/">
+            What is HTTP? How Web Applications and Browsers Communicate
+            <small>01 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/front-end/2014/08/27/parsing-the-html-to-a-dom/">
+            Parsing the HTML to a DOM Tree
+            <small>27 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+  </body>
+</html>

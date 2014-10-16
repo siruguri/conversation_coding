@@ -1,6 +1,6 @@
 # Ignore docs files
 _gh_pages
-# Removing this so that custom plugins will generate site locally - _site
+_site
 .ruby-version
 
 # Numerous always-ignore extensions
@@ -40,4 +40,3 @@ validation-report.json
 # Folders to ignore
 node_modules
 *.db
-*.rdb

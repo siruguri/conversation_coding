@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Parsing the HTML to a DOM Tree &middot; Conversational Coding
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Conversational Coding
+        </a>
+      </h1>
+      <p class="lead"></p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/events/">Events</a>
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+
+    <p>&copy; 2014. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Parsing the HTML to a DOM Tree</h1>
+  <span class="post-date">27 Aug 2014</span>
+  <span class='comment-count-field'><a href='/beginners-series/front-end/2014/08/27/parsing-the-html-to-a-dom#disqus_thread'></a></span>
+  <p>The hierarchical structure of an HTML page is usually accessed via a data structure called the
+DOM. Most programming languages have libraries that let you convert an HTML page into a DOM. Why do
+we do this? HTML pages are just a long list of textual characters - for a programming language to
+understand what <em>elements</em> (another word for tags) are contained in the document, the text has to be
+<em>parsed</em> into a format that’s easier for a script to manipulate. The DOM is one such format.</p>
+
+<p>A DOM structure usually converts an HTML document into a <em>tree</em>. The tree has a <em>root</em> - which
+corresponds to the element that contains the entire document, typically, either a “dummy” root that
+refers to the HTML document type, or to the tag <code>&lt;html&gt;</code>. The root element, also referred to as the
+<em>root node</em>, has a list of <em>child nodes</em> that correspond to each tag contained within the root
+tag. Each of those child nodes will have further child nodes, because they might in turn contain
+HTML tags, in the HTML document. For example, here’s what the “tree structure” of a very simple HTML
+document (note that the root node here is the “dummy” mentioned above):</p>
+
+<p><img src="http://localhost:4000/assets/html_hierarchy.gif" alt="DOM tree example" /></p>
+
+<h1 id="printing-out-nodes">Printing Out Nodes</h1>
+
+<p>Nodes typically have the following information that you’re usually looking for:</p>
+
+<ul>
+  <li>Its name</li>
+  <li>A list of its attributes, and the key/value components of each attribute</li>
+  <li>A list of the node’s child nodes</li>
+</ul>
+
+<h2 id="content-nodes">Content Nodes</h2>
+
+<p>One of the special child nodes of any node is its <em>content node</em>. In an HTML document, the only text that is shown on the screen by the browser is the text in a content node. Note that in an HTML document, the content node is the one that has <em>no tag</em>. This can be confusing sometimes when inspecting an HTML document visually - unless you pay careful attention to the open and close tags, you might not be able to easily figure out where the content nodes are.</p>
+
+<p>An additional complication is that the content nodes of <em>some</em> tags, notably the <code>&lt;script&gt;</code> and
+<code>&lt;style&gt;</code> tags, are <em>not</em> displayed by the browser, even though visually they look the same as the
+content child of any other tag, like an <code>h1</code> tag, for example.</p>
+
+<h1 id="searching-in-the-dom-tree">Searching in the DOM tree</h1>
+
+<p>To locate a specific tag in an HTML document, you can <em>walk</em> the DOM tree - start at the root node,
+check if the node you’re looking for is one of the root’s children, and if not, then repeat the
+process with the children of each child node, and so on.</p>
+
+<p>This can get cumbersome when trying to locate more than one node - let’s say, you’re trying to find
+all the links in a document. You’d have to start at the root node, and keep track of every node that
+corresponds to the <code>&lt;a&gt;</code> tag (the <em>anchor</em> tag.)</p>
+
+<p>Instead, most DOM parsing libraries come with a couple of ways of instantly identifying all nodes with a specific name, or with certain attributes.</p>
+
+<p>The most popular DOM parsing library in Ruby is <em><a href="http://www.nokogiri.org/">Nokogiri</a></em> - this code snippet, for example, opens a file and counts how many list item tags are in it (to understand the <code>css</code> method, read on to the next section.)</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;nokogiri&#39;</span>
+
+<span class="n">dom</span><span class="o">=</span><span class="no">Nokogiri</span><span class="o">::</span><span class="no">HTML</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;input.html&#39;</span><span class="p">))</span>
+
+<span class="n">all_list_item</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s2">&quot;The number of list items is </span><span class="si">#{</span><span class="n">all_list_items</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<p>In this lesson, we’ll look at one way of doing this - <code>CSS Selectors</code>.</p>
+
+<h2 id="using-a-css-selector">Using a CSS Selector</h2>
+
+<p>A <em>CSS Selector</em> is a pattern that denotes a search within a DOM tree. The simplest CSS selector is simply the name of a tag, and it means, “Search for all nodes with this name.” </p>
+
+<p>For example, to search for all anchor (<code>a</code>) tags, you would use the following method call to <code>css</code>:</p>
+
+<div class="highlight"><pre><code class="ruby">    <span class="n">all_a_links</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Sometimes there might be too many tags with the same name - in fact, most HTML documents are
+dominated by two tags - <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> tags. The reason for this is that there’s been a shift
+to move away from a multitude of tags, each with its own special behavior, to having a small number
+of tags, whose behavior is modified by using <em>stylesheets</em> rather than by being implicit in the name
+of the tag.</p>
+
+<p>The most visible effect of this change is that fewer HTML pages now use the <code>&lt;table&gt;</code> tag (and other
+corresponding tags), used to visualize information in a tabular form. Instead, the visual parameters
+of tables in HTML pages - width and height, size of the table’s cell borders, etc. - are now defined
+in stylesheets.</p>
+
+<p>Coming back to CSS selectors - if there are lots of <code>&lt;div&gt;</code> tags in a document, how do you know which one you want to select? That problem is usually solved by most HTML (or we can refer to them as “front-end”) developers by adding either a <code>class</code> or an <code>id</code> attribute to a tag. This leads to corresponding CSS selectors, as follows:</p>
+
+<ul>
+  <li>To search for all tags with a specific <code>id</code> attribute value: <code>tagname#id_value</code> - note the <code>#</code> character.</li>
+  <li>To search for all tags with a specific <code>class</code> attribute value (aka, a <em>class name</em>): <code>tagname.classname</code> - note the period between the two parts.</li>
+</ul>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1"># This searches for all divs with the class name &#39;title-text&#39;</span>
+<span class="n">title_text_divs</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;div.title-text&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>CSS selectors are used not just in parsing a DOM tree, but also in specifying the style for nodes, using cascading stylesheets. This lesson doesn’t address how CSS works when applying styles - for a good introductory start, check out <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/What_is_CSS">the Mozilla Developer Network Guide to Getting Started with CSS</a>.</p>
+
+<p>The <a href="/beginners-series/back-end/2014/08/31/basics-of-sql/">next post in this series on SQL basics</a> will cover the use of SQL - we will see how to get the information we obtain from a webpage into a local (relational) database.</p>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li>Some tutorials on DOM: <a href="http://www.lynda.com/HTML-tutorials/What-Document-Object-Model-DOM/122462/137616-4.html">A free video tutorial on Lynda</a></li>
+  <li>CSS
+    <ul>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/What_is_CSS">How to use CSS to style your HTML</a></li>
+      <li>More on selectors: <a href="http://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048">the basics</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<!-- Disqus -->
+<div id="disqus_thread">
+  <script type="text/javascript">
+   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+   var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+   
+   /* * * DON'T EDIT BELOW THIS LINE * * */
+   (function() {
+     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>
+    Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span>span></a>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/http/2014/09/02/what-is-http-part2/">
+            What is HTTP? How Web Applications and Browsers Communicate (Part II)
+            <small>02 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/http/2014/09/01/what-is-http/">
+            What is HTTP? How Web Applications and Browsers Communicate
+            <small>01 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/back-end/2014/08/31/basics-of-sql/">
+            SQL Basics&#58; Understanding Database Queries
+            <small>31 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+  </body>
+</html>
