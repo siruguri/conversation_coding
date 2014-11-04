@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      What Is The Command Line? &middot; Conversational Coding
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Conversational Coding
+        </a>
+      </h1>
+      <p class="lead"></p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/events/">Events</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+
+    <p>&copy; 2014. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">What Is The Command Line?</h1>
+  <span class="post-date">03 Nov 2014</span>
+  <span class='comment-count-field'><a href='/beginners-series/unix/2014/11/03/using-the-command-line#disqus_thread'></a></span>
+  <p>The “command line” or “shell” is a text-based interface to your
+computer. All computers - whether they run Chrome OS, Apple OSX, or
+Windows - have a shell. There are essentially two flavors of shells,
+though - the UNIX shell and the Windows shell. This tutorial will
+focus only on the UNIX shell; the structure of the Windows shell is
+similar but there are some critical differences that are beyond the
+scope of this tutorial to explain.</p>
+
+<h1 id="running-a-shell">Running A Shell</h1>
+
+<p>On an Apple OSX machine, you can start a shell by running an app called <code>Terminal</code>. We recommend instead using another shell application called <code>iTerm</code> which has more customization options.</p>
+
+<p>If you don’t have an OSX machine, we recommend you use the browser-based interface to a UNIX machine provided by the <a href="nitrous.io">Nitrous.io</a> web service. The free tier will suffice for this tutorial.</p>
+
+<h1 id="the-shell-prompt">The Shell Prompt</h1>
+
+<p>When you start your shell application, the first thing you’ll see is a message, followed by a cursor which is either a blinking underscore or a solid block. The message might look like:</p>
+
+<pre><code>Last login: Sat Nov  1 09:41:41 on ttys001
+You have mail.
+~#
+</code></pre>
+
+<p>The characters at the beginning of the last line, where your cursor is, is called the <strong>shell prompt</strong>. The prompt is an indication that the shell is ready to accept keyboard input from you.</p>
+
+<h1 id="files-and-folders">Files and Folders</h1>
+
+<p>The files and folders on your computer are arranged in a <em>hierarchical</em> fashion - this means that each file is a <em>child</em> of some folder, and so is each folder. The parent-child relationship between a folder and a file or another folder is depicted using the <code>/</code> character. So if the file <code>update.txt</code> is in the folder <code>docs</code>, then the location of that file can be written as <code>docs/update.txt</code>, denoting the parent-child relationship. <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<p>There is one (and only one) folder that has no parent (if that weren’t the case, you would follow an infinite chain of parent folders!) This folder is called the system’s <strong>root folder</strong> and is denoted by the character <code>/</code></p>
+
+<p>When you start a shell, you are placed in your <em>home folder</em>. The location of your home folder will depend on the system you are using. To find the location of the folder you are in, type <code>pwd</code> at the shell prompt after you start the shell. For example you might see something like this:</p>
+
+<pre><code>~# pwd
+/Users/sameer
+</code></pre>
+
+<p>Note that the prompt here shows the location of the current folder you are in - because it’s the home folder, the prompt has the character <code>~</code> in it. Conventionally, <code>~</code> represents the home folder.</p>
+
+<p>To change a folder, you use the command <code>cd</code>:</p>
+
+<pre><code>~# cd Desktop
+Desktop# pwd
+/Users/sameer/Desktop
+</code></pre>
+
+<p>If you change the folder using <code>cd</code>, and check the current folder you
+are in again by typing in <code>pwd</code>, you will see that the output
+changes. The folder that you are in at any point is called the
+<em>current working directory</em>, the <em>present working directory</em> or,
+simply, the <em>working directory</em>.<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup></p>
+
+<h1 id="some-special-folders">Some Special Folders</h1>
+
+<p>As mentioned before, the <code>~</code> character represents your home folder. So if you want to switch to your home folder from wherever you are currently, you type in <code>cd ~</code>.</p>
+
+<p>Also, every folder has a parent folder - this is represented by the special name <code>..</code> (two consecutive periods, or <em>dots</em>) So to go one level up in the folder hierarchy, you have to type in <code>cd ..</code></p>
+
+<h1 id="listing-files">Listing Files</h1>
+
+<p>To list the files in a folder, type in the command <code>ls</code>. Here, we have a folder with two files in it: <code>a.txt</code> and <code>b.txt</code></p>
+
+<pre><code>~# ls
+a.txt    b.txt
+</code></pre>
+
+<h1 id="homework">Homework</h1>
+
+<p>You might need to research on the Internet to answer these questions.</p>
+
+<h2 id="unix-shell-basics">UNIX Shell Basics</h2>
+
+<ul>
+  <li>How do you get a list of files in a folder, sorted by the last modified time? How do you reverse the order of sorting (most recently modified first, vs last)?</li>
+  <li>We learned that the shell prompt is set by the value of the variable <code>PS1</code>. The common default on an OSX machine (in the <code>Terminal</code> app) is something like <code>\h:\W \u# </code> This causes the current working folder to be shown, without showing its full path from the root folder. What should the value of <code>PS1</code> be, to show the full path instead?</li>
+  <li>We learned that the character <code>~</code> stands for the home directory - <code>cd ~</code> will make the home directory your current directory. What shell (environment) variable tells you the full path to the home directory?</li>
+  <li>The “shell,” which takes your input from the keyboard and executes commands, etc. is actually itself an application. There are many “shell” applications you can use - the most common ones are probably the applications <code>bash</code>, <code>tcsh</code> and <code>zsh</code>. How can you find out what shell application you are running on our system?</li>
+</ul>
+
+<h2 id="regular-expressions">Regular Expressions</h2>
+
+<ul>
+  <li>What’s a regular expression that matches only valid US zip codes?
+    <ul>
+      <li>How about one that matches only valid Japanese postal codes?</li>
+    </ul>
+  </li>
+  <li>Given a text file, how would you check the number of lines that end in the letter <em>z</em>? <strong>Hint:</strong> you need to learn the special operator for matching at the end of a line.</li>
+  <li>Find all text (ending in <code>.txt</code> or <code>.text</code>) files in the current folder and any of its descendant folder. <strong>Hint:</strong> the <code>du</code> command is a useful way of doing a recursive listing of files, starting from the current folder.</li>
+  <li>List the files in a folder that were created after 8PM. <code>ls</code> by itself does not have an option to filter a file list, so you’ll have to do this with regular expressions and the <code>-l</code> option to <code>ls</code>.</li>
+  <li>Print the number of files in a folder that are larger than 1KB.
+    <ul>
+      <li>Just by using <code>grep</code>, your solution might not work under certain circumstances. Feel free to propose a “good enough” solution that has some limitations - in that case, list what those limitations are.</li>
+    </ul>
+  </li>
+  <li>Continuing to use <code>grep</code>, how can you figure out how many files are at least two levels deep, starting from the current folder? (That is, they are in a sub-folder of a sub-folder of the current working folder.) <strong>Hint:</strong> You probably want to use <code>du</code> again</li>
+</ul>
+
+<p>That’s it - have fun!</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Here’s one difference between UNIX shells and Windows shells. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Note that the terms <em>directory</em> and <em>folder</em> will be used interchangeably in this tutorial. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</div>
+
+<!-- Disqus -->
+<div id="disqus_thread">
+  <script type="text/javascript">
+   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+   var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+   
+   /* * * DON'T EDIT BELOW THIS LINE * * */
+   (function() {
+     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>
+    Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span>span></a>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/http/2014/09/02/what-is-http-part2/">
+            What is HTTP? How Web Applications and Browsers Communicate (Part II)
+            <small>02 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/http/2014/09/01/what-is-http/">
+            What is HTTP? How Web Applications and Browsers Communicate
+            <small>01 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/beginners-series/back-end/2014/08/31/basics-of-sql/">
+            SQL Basics&#58; Understanding Database Queries
+            <small>31 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'conversationalcoding'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+  </body>
+</html>

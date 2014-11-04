@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Conversational Coding</title>
- <link href="http://www.conversationalcoding.com//atom.xml" rel="self"/>
- <link href="http://www.conversationalcoding.com//"/>
- <updated>2014-10-15T21:37:23-07:00</updated>
- <id>http://www.conversationalcoding.com/</id>
+ <link href="http://localhost:4000//atom.xml" rel="self"/>
+ <link href="http://localhost:4000//"/>
+ <updated>2014-11-03T20:51:02-08:00</updated>
+ <id>http://localhost:4000/</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
@@ -13,10 +13,128 @@
 
  
  <entry>
+   <title>What Is The Command Line?</title>
+   <link href="http://localhost:4000//beginners-series/unix/2014/11/03/using-the-command-line/"/>
+   <updated>2014-11-03T00:00:00-08:00</updated>
+   <id>http://localhost:4000//beginners-series/unix/2014/11/03/using-the-command-line</id>
+   <content type="html">&lt;p&gt;The “command line” or “shell” is a text-based interface to your
+computer. All computers - whether they run Chrome OS, Apple OSX, or
+Windows - have a shell. There are essentially two flavors of shells,
+though - the UNIX shell and the Windows shell. This tutorial will
+focus only on the UNIX shell; the structure of the Windows shell is
+similar but there are some critical differences that are beyond the
+scope of this tutorial to explain.&lt;/p&gt;
+
+&lt;h1 id=&quot;running-a-shell&quot;&gt;Running A Shell&lt;/h1&gt;
+
+&lt;p&gt;On an Apple OSX machine, you can start a shell by running an app called &lt;code&gt;Terminal&lt;/code&gt;. We recommend instead using another shell application called &lt;code&gt;iTerm&lt;/code&gt; which has more customization options.&lt;/p&gt;
+
+&lt;p&gt;If you don’t have an OSX machine, we recommend you use the browser-based interface to a UNIX machine provided by the &lt;a href=&quot;nitrous.io&quot;&gt;Nitrous.io&lt;/a&gt; web service. The free tier will suffice for this tutorial.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-shell-prompt&quot;&gt;The Shell Prompt&lt;/h1&gt;
+
+&lt;p&gt;When you start your shell application, the first thing you’ll see is a message, followed by a cursor which is either a blinking underscore or a solid block. The message might look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Last login: Sat Nov  1 09:41:41 on ttys001
+You have mail.
+~#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The characters at the beginning of the last line, where your cursor is, is called the &lt;strong&gt;shell prompt&lt;/strong&gt;. The prompt is an indication that the shell is ready to accept keyboard input from you.&lt;/p&gt;
+
+&lt;h1 id=&quot;files-and-folders&quot;&gt;Files and Folders&lt;/h1&gt;
+
+&lt;p&gt;The files and folders on your computer are arranged in a &lt;em&gt;hierarchical&lt;/em&gt; fashion - this means that each file is a &lt;em&gt;child&lt;/em&gt; of some folder, and so is each folder. The parent-child relationship between a folder and a file or another folder is depicted using the &lt;code&gt;/&lt;/code&gt; character. So if the file &lt;code&gt;update.txt&lt;/code&gt; is in the folder &lt;code&gt;docs&lt;/code&gt;, then the location of that file can be written as &lt;code&gt;docs/update.txt&lt;/code&gt;, denoting the parent-child relationship. &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;There is one (and only one) folder that has no parent (if that weren’t the case, you would follow an infinite chain of parent folders!) This folder is called the system’s &lt;strong&gt;root folder&lt;/strong&gt; and is denoted by the character &lt;code&gt;/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;When you start a shell, you are placed in your &lt;em&gt;home folder&lt;/em&gt;. The location of your home folder will depend on the system you are using. To find the location of the folder you are in, type &lt;code&gt;pwd&lt;/code&gt; at the shell prompt after you start the shell. For example you might see something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# pwd
+/Users/sameer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that the prompt here shows the location of the current folder you are in - because it’s the home folder, the prompt has the character &lt;code&gt;~&lt;/code&gt; in it. Conventionally, &lt;code&gt;~&lt;/code&gt; represents the home folder.&lt;/p&gt;
+
+&lt;p&gt;To change a folder, you use the command &lt;code&gt;cd&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# cd Desktop
+Desktop# pwd
+/Users/sameer/Desktop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you change the folder using &lt;code&gt;cd&lt;/code&gt;, and check the current folder you
+are in again by typing in &lt;code&gt;pwd&lt;/code&gt;, you will see that the output
+changes. The folder that you are in at any point is called the
+&lt;em&gt;current working directory&lt;/em&gt;, the &lt;em&gt;present working directory&lt;/em&gt; or,
+simply, the &lt;em&gt;working directory&lt;/em&gt;.&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;some-special-folders&quot;&gt;Some Special Folders&lt;/h1&gt;
+
+&lt;p&gt;As mentioned before, the &lt;code&gt;~&lt;/code&gt; character represents your home folder. So if you want to switch to your home folder from wherever you are currently, you type in &lt;code&gt;cd ~&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also, every folder has a parent folder - this is represented by the special name &lt;code&gt;..&lt;/code&gt; (two consecutive periods, or &lt;em&gt;dots&lt;/em&gt;) So to go one level up in the folder hierarchy, you have to type in &lt;code&gt;cd ..&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;listing-files&quot;&gt;Listing Files&lt;/h1&gt;
+
+&lt;p&gt;To list the files in a folder, type in the command &lt;code&gt;ls&lt;/code&gt;. Here, we have a folder with two files in it: &lt;code&gt;a.txt&lt;/code&gt; and &lt;code&gt;b.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# ls
+a.txt    b.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;homework&quot;&gt;Homework&lt;/h1&gt;
+
+&lt;p&gt;You might need to research on the Internet to answer these questions.&lt;/p&gt;
+
+&lt;h2 id=&quot;unix-shell-basics&quot;&gt;UNIX Shell Basics&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you get a list of files in a folder, sorted by the last modified time? How do you reverse the order of sorting (most recently modified first, vs last)?&lt;/li&gt;
+  &lt;li&gt;We learned that the shell prompt is set by the value of the variable &lt;code&gt;PS1&lt;/code&gt;. The common default on an OSX machine (in the &lt;code&gt;Terminal&lt;/code&gt; app) is something like &lt;code&gt;\h:\W \u# &lt;/code&gt; This causes the current working folder to be shown, without showing its full path from the root folder. What should the value of &lt;code&gt;PS1&lt;/code&gt; be, to show the full path instead?&lt;/li&gt;
+  &lt;li&gt;We learned that the character &lt;code&gt;~&lt;/code&gt; stands for the home directory - &lt;code&gt;cd ~&lt;/code&gt; will make the home directory your current directory. What shell (environment) variable tells you the full path to the home directory?&lt;/li&gt;
+  &lt;li&gt;The “shell,” which takes your input from the keyboard and executes commands, etc. is actually itself an application. There are many “shell” applications you can use - the most common ones are probably the applications &lt;code&gt;bash&lt;/code&gt;, &lt;code&gt;tcsh&lt;/code&gt; and &lt;code&gt;zsh&lt;/code&gt;. How can you find out what shell application you are running on our system?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;regular-expressions&quot;&gt;Regular Expressions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What’s a regular expression that matches only valid US zip codes?
+    &lt;ul&gt;
+      &lt;li&gt;How about one that matches only valid Japanese postal codes?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Given a text file, how would you check the number of lines that end in the letter &lt;em&gt;z&lt;/em&gt;? &lt;strong&gt;Hint:&lt;/strong&gt; you need to learn the special operator for matching at the end of a line.&lt;/li&gt;
+  &lt;li&gt;Find all text (ending in &lt;code&gt;.txt&lt;/code&gt; or &lt;code&gt;.text&lt;/code&gt;) files in the current folder and any of its descendant folder. &lt;strong&gt;Hint:&lt;/strong&gt; the &lt;code&gt;du&lt;/code&gt; command is a useful way of doing a recursive listing of files, starting from the current folder.&lt;/li&gt;
+  &lt;li&gt;List the files in a folder that were created after 8PM. &lt;code&gt;ls&lt;/code&gt; by itself does not have an option to filter a file list, so you’ll have to do this with regular expressions and the &lt;code&gt;-l&lt;/code&gt; option to &lt;code&gt;ls&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Print the number of files in a folder that are larger than 1KB.
+    &lt;ul&gt;
+      &lt;li&gt;Just by using &lt;code&gt;grep&lt;/code&gt;, your solution might not work under certain circumstances. Feel free to propose a “good enough” solution that has some limitations - in that case, list what those limitations are.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Continuing to use &lt;code&gt;grep&lt;/code&gt;, how can you figure out how many files are at least two levels deep, starting from the current folder? (That is, they are in a sub-folder of a sub-folder of the current working folder.) &lt;strong&gt;Hint:&lt;/strong&gt; You probably want to use &lt;code&gt;du&lt;/code&gt; again&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s it - have fun!&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Here’s one difference between UNIX shells and Windows shells. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;Note that the terms &lt;em&gt;directory&lt;/em&gt; and &lt;em&gt;folder&lt;/em&gt; will be used interchangeably in this tutorial. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>What is HTTP? How Web Applications and Browsers Communicate (Part II)</title>
-   <link href="http://www.conversationalcoding.com//beginners-series/http/2014/09/02/what-is-http-part2/"/>
+   <link href="http://localhost:4000//beginners-series/http/2014/09/02/what-is-http-part2/"/>
    <updated>2014-09-02T00:00:00-07:00</updated>
-   <id>http://www.conversationalcoding.com//beginners-series/http/2014/09/02/what-is-http-part2</id>
+   <id>http://localhost:4000//beginners-series/http/2014/09/02/what-is-http-part2</id>
    <content type="html">&lt;p&gt;In &lt;a href=&quot;--prev_post_by_cat--&quot;&gt;the previous lesson on HTTP&lt;/a&gt;, we learned what HTTP is and how it forms a critical part of the communication systems that tie browsers, websites, and web applications together. We saw how to look at the HTTP requests being generated by a browser when loading a webpage.&lt;/p&gt;
 
 &lt;p&gt;As we discussed, one of the essential headers in the request is the method header, that lists the method and resource
@@ -101,9 +219,9 @@ first response header is the status header, with the “OK” message we mention
  
  <entry>
    <title>What is HTTP? How Web Applications and Browsers Communicate</title>
-   <link href="http://www.conversationalcoding.com//beginners-series/http/2014/09/01/what-is-http/"/>
+   <link href="http://localhost:4000//beginners-series/http/2014/09/01/what-is-http/"/>
    <updated>2014-09-01T00:00:00-07:00</updated>
-   <id>http://www.conversationalcoding.com//beginners-series/http/2014/09/01/what-is-http</id>
+   <id>http://localhost:4000//beginners-series/http/2014/09/01/what-is-http</id>
    <content type="html">&lt;p&gt;Web applications are typically written as computer programs that run constantly, waiting for &lt;em&gt;requests&lt;/em&gt; from browsers
 running on other computers. Those computers can be someone’s desktop, laptop, or mobile phone. The browser requests are
 usually made by a human being who clicks on a link in a webpage (or in her email,) and expects to see a webpage as a
@@ -194,9 +312,9 @@ browsers, but that’s not always the case.&lt;/p&gt;
  
  <entry>
    <title>SQL Basics&#58; Understanding Database Queries</title>
-   <link href="http://www.conversationalcoding.com//beginners-series/back-end/2014/08/31/basics-of-sql/"/>
+   <link href="http://localhost:4000//beginners-series/back-end/2014/08/31/basics-of-sql/"/>
    <updated>2014-08-31T00:00:00-07:00</updated>
-   <id>http://www.conversationalcoding.com//beginners-series/back-end/2014/08/31/basics-of-sql</id>
+   <id>http://localhost:4000//beginners-series/back-end/2014/08/31/basics-of-sql</id>
    <content type="html">&lt;p&gt;In this exercise, we figure out how to create and update data in a database. For this purpose, we will use SQLite3 as our database application.&lt;/p&gt;
 
 &lt;p&gt;Note that there are many applications you can use to create your relational databases (&lt;em&gt;RDBMSes&lt;/em&gt;). The most popular &lt;a href=&quot;http://en.wikipedia.org/wiki/List_of_relational_database_management_systems&quot;&gt;open source RDBMSes&lt;/a&gt; are probably Postgres, MySQL, CouchDB, and SQLite3. Which one might you use? Well, there are numerous &lt;a href=&quot;https://www.digitalocean.com/community/tutorials/sqlite-vs-mysql-vs-postgresql-a-comparison-of-relational-database-management-systems&quot;&gt;posts&lt;/a&gt; on &lt;a href=&quot;http://www.databasejournal.com/sqletc/article.php/3486596/Open-Source-Databases-A-brief-look-at-the-Berkeley-DB-Derby-Firebird-Ingres-MySQL-and-PostgreSQL-DBMS.htm&quot;&gt;the Web&lt;/a&gt; that &lt;a href=&quot;http://stackoverflow.com/questions/1635273/postgres-vs-firebird&quot;&gt;attempt to answer&lt;/a&gt; that very question! &lt;/p&gt;
@@ -318,9 +436,9 @@ end
  
  <entry>
    <title>Parsing the HTML to a DOM Tree</title>
-   <link href="http://www.conversationalcoding.com//beginners-series/front-end/2014/08/27/parsing-the-html-to-a-dom/"/>
+   <link href="http://localhost:4000//beginners-series/front-end/2014/08/27/parsing-the-html-to-a-dom/"/>
    <updated>2014-08-27T00:00:00-07:00</updated>
-   <id>http://www.conversationalcoding.com//beginners-series/front-end/2014/08/27/parsing-the-html-to-a-dom</id>
+   <id>http://localhost:4000//beginners-series/front-end/2014/08/27/parsing-the-html-to-a-dom</id>
    <content type="html">&lt;p&gt;The hierarchical structure of an HTML page is usually accessed via a data structure called the
 DOM. Most programming languages have libraries that let you convert an HTML page into a DOM. Why do
 we do this? HTML pages are just a long list of textual characters - for a programming language to
@@ -335,7 +453,7 @@ tag. Each of those child nodes will have further child nodes, because they might
 HTML tags, in the HTML document. For example, here’s what the “tree structure” of a very simple HTML
 document (note that the root node here is the “dummy” mentioned above):&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://www.conversationalcoding.com/assets/html_hierarchy.gif&quot; alt=&quot;DOM tree example&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/html_hierarchy.gif&quot; alt=&quot;DOM tree example&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;printing-out-nodes&quot;&gt;Printing Out Nodes&lt;/h1&gt;
 
@@ -445,15 +563,15 @@ in stylesheets.&lt;/p&gt;
  
  <entry>
    <title>HTML Basics&#58; Understanding HTML and the DOM</title>
-   <link href="http://www.conversationalcoding.com//beginners-series/front-end/2014/08/26/html-basics/"/>
+   <link href="http://localhost:4000//beginners-series/front-end/2014/08/26/html-basics/"/>
    <updated>2014-08-26T00:00:00-07:00</updated>
-   <id>http://www.conversationalcoding.com//beginners-series/front-end/2014/08/26/html-basics</id>
+   <id>http://localhost:4000//beginners-series/front-end/2014/08/26/html-basics</id>
    <content type="html">&lt;p&gt;To start, let’s breeze through a basic understanding of HTML. If you are reading this webpage
 in a desktop browser, like Firefox, you should be able to view source, typically via the top-level
 menu or the right click menu. You will see the text of the webpage interspersed with what are called
 HTML tags, which are text strings prefixed with the &lt;code&gt;&amp;lt;&lt;/code&gt; character. Here, for example, is the source of this very page:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://www.conversationalcoding.com/assets/view_source.png&quot; alt=&quot;View Source Screenshot&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/view_source.png&quot; alt=&quot;View Source Screenshot&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The tags are part of the HTML language specification - to put it simply, each tag has a &lt;em&gt;name&lt;/em&gt;, and
 a list of &lt;em&gt;tag attributes&lt;/em&gt;. The tag attributes are specific as &lt;em&gt;key/value pairs&lt;/em&gt;, in the form
