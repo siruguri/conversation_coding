@@ -128,7 +128,7 @@ You have mail.
 
 <p>Note that the prompt here shows the location of the current folder you are in - because it’s the home folder, the prompt has the character <code>~</code> in it. Conventionally, <code>~</code> represents the home folder.</p>
 
-<p>To change a folder, you use the command <code>cd</code>:</p>
+<p>To change a folder, you use the command <code>cd</code>, followed by the name of the folder you want to change to:</p>
 
 <pre><code>~# cd Desktop
 Desktop# pwd
@@ -154,6 +154,48 @@ simply, the <em>working directory</em>.<sup id="fnref:2"><a href="#fn:2" class="
 <pre><code>~# ls
 a.txt    b.txt
 </code></pre>
+
+<p>To list more than just the name of the file, you type <code>-l</code> after the command (with a space in between) - the output below is again for the folder with just two files:</p>
+
+<pre><code>~# ls -l
+total 8
+-rw-r--r--  1 sameer  staff     0 Nov  5 18:36 a.txt
+-rw-r--r--  1 sameer  staff  1214 Nov  5 18:36 b.txt
+</code></pre>
+
+<p>For now, don’t worry if the output you see doesn’t make sense. You might have noticed the date in the middle of each line - that’s the date the file was last modified. The number before that date is the size of the file. And so on.</p>
+
+<h1 id="command-line-arguments-and-options">Command Line Arguments and Options</h1>
+
+<p>As you might have noticed by now, all commands in your shell follow a pattern - you type the name of the command first, and then you type in more words, separated by spaces, that tell the command what to do. If you type in <code>cd Desktop</code>, you are asking to change into the folder <code>Desktop</code>. If you type in <code>-l</code> after <code>ls</code>, you are asking for a listing of files in what is called <em>long format</em> - which includes information about the file beyond just its name.</p>
+
+<p>The words following a command are commonly referred to as its <em>arguments</em>. When a command-line argument is preceded by a hyphen (or “dash”) character, it’s commonly referred to as a <em>command-line option</em>.</p>
+
+<p>So most actions you take will involve a sequence of words, that follow this pattern:</p>
+
+<pre><code>command (optional-)command-line-options (optional-)command-line-arguments
+</code></pre>
+
+<h1 id="the-environment-and-its-variables">The Environment And Its Variables</h1>
+
+<p>How does the shell know where to look for commands? That is, if you typed in <code>hellothere</code>, would that do something? (Answer: no.) So where does the shell keep a record of which commands are valid and which are not?</p>
+
+<p>All your commands are themselves files on the system somewhere. To
+locate them, the shell uses a configuration setting called <code>PATH</code> (the
+upper case letters are significant) which stores a list of folders on
+the system where all the command files are located. To see the value of this setting - also called an ‘environment variable’ or a <em>shell variable</em>, type in:</p>
+
+<pre><code>~# echo $PATH
+</code></pre>
+
+<p>Remember to use upper case - <code>$path</code> won’t work. On my machine, here’s what the output is:</p>
+
+<pre><code>/usr/local/heroku/bin:/usr/local/sbin:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin
+</code></pre>
+
+<p>The various folders are separated here by the <code>:</code> character. Notice that all the folders end in the word <code>bin</code> - that’s a common convention on UNIX systems - <strong>bin</strong> is short for “binary.”</p>
+
+<p>You now have a basic understanding of how you can use the shell application to understand the basic configuration of your system. In the <a href="/beginners-series/unix/2014/11/05/redirections-pipes-and-regular-expressions/">following lesson</a>, we will learn about how to pass output from one command to be used by another.</p>
 
 <h1 id="homework">Homework</h1>
 
@@ -227,6 +269,15 @@ a.txt    b.txt
     
       <li>
         <h3>
+          <a href="/beginners-series/unix/2014/11/05/redirections-pipes-and-regular-expressions/">
+            Redirection, Pipes, and Regular Expressions
+            <small>05 Nov 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
           <a href="/beginners-series/http/2014/09/02/what-is-http-part2/">
             What is HTTP? How Web Applications and Browsers Communicate (Part II)
             <small>02 Sep 2014</small>
@@ -239,15 +290,6 @@ a.txt    b.txt
           <a href="/beginners-series/http/2014/09/01/what-is-http/">
             What is HTTP? How Web Applications and Browsers Communicate
             <small>01 Sep 2014</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/beginners-series/back-end/2014/08/31/basics-of-sql/">
-            SQL Basics&#58; Understanding Database Queries
-            <small>31 Aug 2014</small>
           </a>
         </h3>
       </li>

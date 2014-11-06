@@ -4,13 +4,26 @@
  <title>Conversational Coding</title>
  <link href="http://localhost:4000//atom.xml" rel="self"/>
  <link href="http://localhost:4000//"/>
- <updated>2014-11-03T20:51:02-08:00</updated>
+ <updated>2014-11-05T20:55:13-08:00</updated>
  <id>http://localhost:4000/</id>
  <author>
    <name>Mark Otto</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Redirection, Pipes, and Regular Expressions</title>
+   <link href="http://localhost:4000//beginners-series/unix/2014/11/05/redirections-pipes-and-regular-expressions/"/>
+   <updated>2014-11-05T00:00:00-08:00</updated>
+   <id>http://localhost:4000//beginners-series/unix/2014/11/05/redirections-pipes-and-regular-expressions</id>
+   <content type="html">&lt;p&gt;The real power of using the command line starts becoming apparent when you look at different commands as building blocks, that can be combined to figure things about the system that each command individually cannot produce. In this respect, the command line is very different from using “graphical” or “visual” applications.&lt;/p&gt;
+
+&lt;p&gt;The output of the calculations you do in an Excel spreadsheet, for example, cannot easily be entered into a form in a website, for example - you have to copy and paste the values from each cell into the address bar of your browser, which can be a painfully repetitive and error-prone process. In this lesson, we will learn how to simplify this type of task.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;--prev_post_by_cat--&quot;&gt;The previous lesson introduced us to the shell&lt;/a&gt;.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>What Is The Command Line?</title>
@@ -56,7 +69,7 @@ You have mail.
 
 &lt;p&gt;Note that the prompt here shows the location of the current folder you are in - because it’s the home folder, the prompt has the character &lt;code&gt;~&lt;/code&gt; in it. Conventionally, &lt;code&gt;~&lt;/code&gt; represents the home folder.&lt;/p&gt;
 
-&lt;p&gt;To change a folder, you use the command &lt;code&gt;cd&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;To change a folder, you use the command &lt;code&gt;cd&lt;/code&gt;, followed by the name of the folder you want to change to:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;~# cd Desktop
 Desktop# pwd
@@ -82,6 +95,48 @@ simply, the &lt;em&gt;working directory&lt;/em&gt;.&lt;sup id=&quot;fnref:2&quot
 &lt;pre&gt;&lt;code&gt;~# ls
 a.txt    b.txt
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To list more than just the name of the file, you type &lt;code&gt;-l&lt;/code&gt; after the command (with a space in between) - the output below is again for the folder with just two files:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# ls -l
+total 8
+-rw-r--r--  1 sameer  staff     0 Nov  5 18:36 a.txt
+-rw-r--r--  1 sameer  staff  1214 Nov  5 18:36 b.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For now, don’t worry if the output you see doesn’t make sense. You might have noticed the date in the middle of each line - that’s the date the file was last modified. The number before that date is the size of the file. And so on.&lt;/p&gt;
+
+&lt;h1 id=&quot;command-line-arguments-and-options&quot;&gt;Command Line Arguments and Options&lt;/h1&gt;
+
+&lt;p&gt;As you might have noticed by now, all commands in your shell follow a pattern - you type the name of the command first, and then you type in more words, separated by spaces, that tell the command what to do. If you type in &lt;code&gt;cd Desktop&lt;/code&gt;, you are asking to change into the folder &lt;code&gt;Desktop&lt;/code&gt;. If you type in &lt;code&gt;-l&lt;/code&gt; after &lt;code&gt;ls&lt;/code&gt;, you are asking for a listing of files in what is called &lt;em&gt;long format&lt;/em&gt; - which includes information about the file beyond just its name.&lt;/p&gt;
+
+&lt;p&gt;The words following a command are commonly referred to as its &lt;em&gt;arguments&lt;/em&gt;. When a command-line argument is preceded by a hyphen (or “dash”) character, it’s commonly referred to as a &lt;em&gt;command-line option&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;So most actions you take will involve a sequence of words, that follow this pattern:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;command (optional-)command-line-options (optional-)command-line-arguments
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;the-environment-and-its-variables&quot;&gt;The Environment And Its Variables&lt;/h1&gt;
+
+&lt;p&gt;How does the shell know where to look for commands? That is, if you typed in &lt;code&gt;hellothere&lt;/code&gt;, would that do something? (Answer: no.) So where does the shell keep a record of which commands are valid and which are not?&lt;/p&gt;
+
+&lt;p&gt;All your commands are themselves files on the system somewhere. To
+locate them, the shell uses a configuration setting called &lt;code&gt;PATH&lt;/code&gt; (the
+upper case letters are significant) which stores a list of folders on
+the system where all the command files are located. To see the value of this setting - also called an ‘environment variable’ or a &lt;em&gt;shell variable&lt;/em&gt;, type in:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# echo $PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Remember to use upper case - &lt;code&gt;$path&lt;/code&gt; won’t work. On my machine, here’s what the output is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/usr/local/heroku/bin:/usr/local/sbin:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The various folders are separated here by the &lt;code&gt;:&lt;/code&gt; character. Notice that all the folders end in the word &lt;code&gt;bin&lt;/code&gt; - that’s a common convention on UNIX systems - &lt;strong&gt;bin&lt;/strong&gt; is short for “binary.”&lt;/p&gt;
+
+&lt;p&gt;You now have a basic understanding of how you can use the shell application to understand the basic configuration of your system. In the &lt;a href=&quot;--next_post_by_cat--&quot;&gt;following lesson&lt;/a&gt;, we will learn about how to pass output from one command to be used by another.&lt;/p&gt;
 
 &lt;h1 id=&quot;homework&quot;&gt;Homework&lt;/h1&gt;
 

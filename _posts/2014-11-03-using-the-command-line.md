@@ -41,7 +41,7 @@ When you start a shell, you are placed in your _home folder_. The location of yo
 
 Note that the prompt here shows the location of the current folder you are in - because it's the home folder, the prompt has the character `~` in it. Conventionally, `~` represents the home folder.
 
-To change a folder, you use the command `cd`:
+To change a folder, you use the command `cd`, followed by the name of the folder you want to change to:
 
     ~# cd Desktop
     Desktop# pwd
@@ -66,7 +66,43 @@ To list the files in a folder, type in the command `ls`. Here, we have a folder 
     ~# ls
     a.txt    b.txt
 
+To list more than just the name of the file, you type `-l` after the command (with a space in between) - the output below is again for the folder with just two files:
 
+    ~# ls -l
+    total 8
+    -rw-r--r--  1 sameer  staff     0 Nov  5 18:36 a.txt
+    -rw-r--r--  1 sameer  staff  1214 Nov  5 18:36 b.txt
+
+For now, don't worry if the output you see doesn't make sense. You might have noticed the date in the middle of each line - that's the date the file was last modified. The number before that date is the size of the file. And so on.
+
+# Command Line Arguments and Options
+
+As you might have noticed by now, all commands in your shell follow a pattern - you type the name of the command first, and then you type in more words, separated by spaces, that tell the command what to do. If you type in `cd Desktop`, you are asking to change into the folder `Desktop`. If you type in `-l` after `ls`, you are asking for a listing of files in what is called _long format_ - which includes information about the file beyond just its name.
+
+The words following a command are commonly referred to as its _arguments_. When a command-line argument is preceded by a hyphen (or "dash") character, it's commonly referred to as a _command-line option_.
+
+So most actions you take will involve a sequence of words, that follow this pattern:
+
+    command (optional-)command-line-options (optional-)command-line-arguments
+
+# The Environment And Its Variables
+
+How does the shell know where to look for commands? That is, if you typed in `hellothere`, would that do something? (Answer: no.) So where does the shell keep a record of which commands are valid and which are not?
+
+All your commands are themselves files on the system somewhere. To
+locate them, the shell uses a configuration setting called `PATH` (the
+upper case letters are significant) which stores a list of folders on
+the system where all the command files are located. To see the value of this setting - also called an 'environment variable' or a _shell variable_, type in:
+
+    ~# echo $PATH
+
+Remember to use upper case - `$path` won't work. On my machine, here's what the output is:
+
+    /usr/local/heroku/bin:/usr/local/sbin:/usr/local/opt/php55/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin
+
+The various folders are separated here by the `:` character. Notice that all the folders end in the word `bin` - that's a common convention on UNIX systems - **bin** is short for "binary."
+
+You now have a basic understanding of how you can use the shell application to understand the basic configuration of your system. In the [following lesson](--next_post_by_cat--), we will learn about how to pass output from one command to be used by another.
 
 # Homework
 
