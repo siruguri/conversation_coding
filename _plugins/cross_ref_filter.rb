@@ -2,7 +2,7 @@ module Jekyll
   module CrossRefFilter
     def resolve_cross_refs(input, url)
       # posts can point to next post
-      current_post = @context.registers[:site].posts.select { |p| "#{url}" == "#{p.url}" }[0]
+      current_post = @context.registers[:site].posts.docs.select { |p| "#{url}" == "#{p.url}" }[0]
 
       prev_post_repl = next_post_repl = prev_post_cat_repl = next_post_cat_repl = '#'
 

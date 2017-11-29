@@ -1,6 +1,6 @@
 # Dependencies
 markdown: kramdown
-
+plugins: [jekyll-paginate]
 redcarpet:
   extensions: [footnotes]
 highlighter:	  pygments
